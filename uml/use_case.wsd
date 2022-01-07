@@ -1,0 +1,13 @@
+@startuml usecase
+scale 1
+left to right direction
+skinparam PackageStyle rect
+actor customer as c
+rectangle todolist {
+    c -- (authentication)
+    (authentication)--> (add a todo): extend
+    (authentication)--> (modify a todo): extend
+    (authentication)--> (remove a todo): extend
+    (authentication)--> (see todo list): extend
+}
+@enduml
