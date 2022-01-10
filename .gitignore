@@ -1,6 +1,9 @@
 # Created by https://www.toptal.com/developers/gitignore/api/flutter,firebase
 # Edit at https://www.toptal.com/developers/gitignore?templates=flutter,firebase
 
+### FlutterFire ###
+lib/firebase_options.dart
+
 ### Firebase ###
 .idea
 **/node_modules/*
