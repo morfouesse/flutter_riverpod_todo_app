@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_riverpod_todo_app/constantes.dart';
+import 'package:flutter_riverpod_todo_app/constants/constantes.dart';
 import 'package:flutter_riverpod_todo_app/models/todo.dart';
 
 final todoRepositoryProvider = Provider((_) => TodoRepository());
