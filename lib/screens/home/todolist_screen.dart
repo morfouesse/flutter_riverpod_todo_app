@@ -6,8 +6,15 @@ import 'package:flutter_riverpod_todo_app/screens/home/todolist_controller.dart'
 class Todolist extends ConsumerWidget {
   const Todolist({Key? key}) : super(key: key);
 
+  /// ajoute une todo
   addTodo(WidgetRef ref, String title, String description, String date) {
-    ref.read(todolistControllerProvider).addTodo(title, description, date);
+    /// on lit une donnée dans le provider sans l'écouter
+    ref.read(handleTodoControllerProvider).addTodo(title, description, date);
+  }
+
+   removeTodo(WidgetRef ref, String id) {
+    /// on lit une donnée dans le provider sans l'écouter
+    ref.read(handleTodoControllerProvider).removeTodo(id);
   }
 
   @override
@@ -16,7 +23,9 @@ class Todolist extends ConsumerWidget {
       appBar: AppBar(
         title: const Text('Entries Management'),
       ),
-      body: ref.watch(todoListProvider).when(
+      /// on affiche en temps réel les changements sur la liste des todo
+      /// en utilisant when pour avoir acces à ces différentes options
+      body: ref.watch(todoListControllerProvider).when(
             loading: () => const Center(child: CircularProgressIndicator()),
             error: (error, trace) => Center(child: Text(error.toString())),
             data: (data) => ListView.builder(
@@ -27,12 +36,19 @@ class Todolist extends ConsumerWidget {
 
                   return ListTile(
                     title: Text(
-                        todo.title + ' ' + todo.description + '\n' + todo.date),
+                      todo.title,
+                    ),
+                    subtitle: Text(
+                      '${todo.description}\n${todo.date}',
+                      
+                    ),
+                    onTap: () => removeTodo(ref, todo.idTodo),
                   );
                 }
 
                 return Text('erreur du serveur');
               },
+              
             ),
           ),
       floatingActionButton: FloatingActionButton(

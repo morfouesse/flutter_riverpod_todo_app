@@ -4,12 +4,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod_todo_app/routes/route_generator.dart';
-import 'package:flutter_riverpod_todo_app/style/colors/colors_constants.dart';
+import 'package:flutter_riverpod_todo_app/themes.dart';
 
-import 'constants/theme_constants.dart';
+import 'constants/routes_constants.dart';
 import 'firebase_options.dart';
 
 void main() async {
+  /// quand on commence avec firebase_options, l'install avec le CLI
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -25,30 +26,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //consumer
+    //TODO:consumer plus tard pour controller l'authentication
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       localizationsDelegates: const [GlobalMaterialLocalizations.delegate],
       supportedLocales: const [Locale('en'), Locale('fr')],
 
       //Définition du thème
-      theme: ThemeData(
-        /// pour l'appBar, floating button et d'autre widget
-        ///primarySwatch:
-        /// pour le background
-        scaffoldBackgroundColor: primaryColor,
-
-        /// pour tout ce qui concerne le texte
-        textTheme: const TextTheme(
-          bodyText2: TextStyle(
-            color: textColor,
-            fontFamily: dongleFont,
-            fontSize: fontSize,
-          ),
-        ),
-      ),
+      theme: Themes().defaultTheme,
       //Route au lancement de l'app
-      initialRoute: '/animatedSplash',
+      initialRoute: animatedSplash,
       //Permet de générer les routes suivantes
       onGenerateRoute: (settings) => RouteGenerator.generateRoute(settings),
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_riverpod_todo_app/constants/routes_constants.dart';
 import 'package:flutter_riverpod_todo_app/screens/register/register_screen.dart';
 import 'package:flutter_riverpod_todo_app/splash_screen/animated_splash_screen.dart';
 import 'package:flutter_riverpod_todo_app/style/colors/colors_constants.dart';
@@ -7,22 +8,22 @@ import 'package:flutter_riverpod_todo_app/style/colors/colors_constants.dart';
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case '/animatedSplash':
+      case animatedSplash:
         return MaterialPageRoute(
-        builder: (context) => AnimatedSplash(),
+        builder: (context) => const AnimatedSplash(),
       );
     //  case '/':
     //    //Si utilisateur connecter renvoies vers l'accueil sinon, vers la page de connexion
     //    return MaterialPageRoute(builder: (context) => SplashScreenWrapper());
 
-    //  case '/login':
+    //  case login:
     //    return MaterialPageRoute(
     //      builder: (context) => LoginScreen(),
     //    );
 
-      case '/register':
+      case register:
         return MaterialPageRoute(
-          builder: (context) => const RegisterScreen(),
+          builder: (context) => const Register(),
         );
 
       default:
