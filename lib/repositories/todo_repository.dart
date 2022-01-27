@@ -1,7 +1,12 @@
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod_todo_app/constants/constants.dart';
+import 'package:flutter_riverpod_todo_app/exceptions/no_internet_exception.dart';
 import 'package:flutter_riverpod_todo_app/models/todo.dart';
 
 /// on va lire l'objet TodoRepository
@@ -23,10 +28,10 @@ class TodoRepository {
       }).then((value) => value.id);
 
       return true;
+    } on SocketException catch (e) {
+      throw NoInternetException(e.message);
     } on FirebaseFirestore catch (e) {
-      if (kDebugMode) {
-        print('ERREUR todoRepository : ' + e.toString());
-      }
+      log('ERREUR todoRepository addTodo : ' + e.toString());
       return false;
     }
   }
@@ -37,15 +42,16 @@ class TodoRepository {
 
       return true;
     } on FirebaseFirestore catch (e) {
-      if (kDebugMode) {
-        print('ERREUR todoRepository : ' + e.toString());
-      }
+      log('ERREUR todoRepository removeTodo : ' + e.toString());
+
       return false;
     }
   }
 
   Future<List<Todo>?> todoList() async {
     try {
+      
+     
       return await _todoListCollection.get().then<List<Todo>>((querySnapshot) {
         return querySnapshot.docs.map((queryDocumentSnapshot) {
           Map<String, dynamic> data = queryDocumentSnapshot.data();
@@ -57,10 +63,11 @@ class TodoRepository {
           );
         }).toList();
       });
+    } on SocketException catch (e) {
+      throw NoInternetException(e.message);
     } on FirebaseFirestore catch (e) {
-      if (kDebugMode) {
-        print('ERREUR benefitService : ' + e.toString());
-      }
+      log('ERREUR benefitService todoList : ' + e.toString());
+
       return null;
     }
   }

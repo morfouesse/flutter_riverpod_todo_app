@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod_todo_app/constants/routes_constants.dart';
+import 'package:flutter_riverpod_todo_app/screens/home/todolist_screen.dart';
 import 'package:flutter_riverpod_todo_app/screens/register/register_screen.dart';
 import 'package:flutter_riverpod_todo_app/splash_screen/animated_splash_screen.dart';
 import 'package:flutter_riverpod_todo_app/style/colors/colors_constants.dart';
@@ -21,9 +22,13 @@ class RouteGenerator {
     //      builder: (context) => LoginScreen(),
     //    );
 
-      case register:
+      case registerRoute:
         return MaterialPageRoute(
           builder: (context) => const Register(),
+        );
+      case todoListRoute:
+        return MaterialPageRoute(
+          builder: (context) => const Todolist(),
         );
 
       default:

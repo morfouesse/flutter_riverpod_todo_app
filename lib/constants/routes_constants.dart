@@ -1,3 +1,4 @@
 const String animatedSplash = '/animatedSplash';
-const String register = '/register';
+const String registerRoute = '/register';
+const String todoListRoute = '/todoList';
 const String login = '/login';
